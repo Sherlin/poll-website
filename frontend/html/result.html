@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ TITLE }}</title>
+
+    <meta name="description" content="{{ POLL_META_DESCRIPTION }}">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ TITLE }}" />
+    <meta property="og:description" content="{{ POLL_META_DESCRIPTION }}" />
+    <meta property="og:url" content="{{ CANONICAL_HOST }}" />
+    <meta property="og:image" content="{{ HOST }}/static/img/icon.png" />
+    <meta property="og:site_name" content="Poll.Horse" />
+    <meta content="#FFD756" data-react-helmet="true" name="theme-color" />
+
+    <link rel="canonical" href="{{ CANONICAL_HOST }}" />
+    <meta name=”robots” content=”noindex,nofollow”>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/result.css">
+    <script nonce="{{ CORS_SCRIPT_NONCE }}" type="text/javascript" src="/static/vendor/js/textfit.js" defer="true"></script>
+    <script nonce="{{ CORS_SCRIPT_NONCE }}" type="text/javascript" src="https://www.gstatic.com/charts/loader.js" defer="true"></script>
+    <script nonce="{{ CORS_SCRIPT_NONCE }}" type="text/javascript">
+        const POLL_VOTE_DATA_STRING = `{{ POLL_OPTION_VOTES }}`;
+        const POLL_BACKEND_URL = "{{ BACKEND_BASE_PATH }}";
+        const POLL_ID = "{{ POLL_ID }}";
+    </script>
+    <script nonce="{{ CORS_SCRIPT_NONCE }}" type="text/javascript" src="/static/js/result.js" defer="true"></script>
+    <!-- FAVICON_MARKER -->
+    
+    <!-- /FAVICON_MARKER -->
+</head>
+<body>
+    <header>
+        <h1><a href="/">Poll.horse</a></h1>
+        <h2>Make voting on things simpler</h2>
+    </header>
+    <main>
+        <section class="poll-id">ID: {{ POLL_ID }}</section>
+        <section class="notepad">
+            <div class="notepad-border"></div>
+            <section class="poll-title">
+                {{ POLL_TITLE }}
+            </section>
+            <section id="poll-options" class="poll-options">
+                {{ POLL_OPTION_DIVS }}
+            </section>
+            <section class="poll-footer">
+                <a href="/{{ POLL_ID }}"><button type="button" id="submit-button">Vote</button></a>
+            </section>
+            <aside id="chart"></aside>
+            <aside id="qrcode"><img alt="QR Code to voting page" src="{{ QR_CODE }}" crossorigin></aside>
+        </section>
+    </main>
+    <footer>
+        <ul>
+            {{ FOOTER_LINKS }}
+        </ul>
+        <div class="copyright">{{ GIT_URL }} {{ FOOTER_COPYRIGHT }}</div>
+    </footer>
+</body>
+</html>

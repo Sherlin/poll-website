@@ -1,0 +1,21 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": false,
+        "es6": true,
+        "node": false
+    },
+    "globals": {
+        "MAX_POLL_OPTIONS": "readonly",
+        "MAX_CHARACTER_LENGTH": "readonly",
+        "POLL_VOTE_DATA_STRING": "readonly",
+        "POLL_BACKEND_URL": "readonly",
+        "POLL_ID": "readonly",
+
+        "textFit": "readonly",
+        "google": "readonly"
+    },
+    "ignorePatterns": [
+        "vendor/**/*"
+    ]
+}

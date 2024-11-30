@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ TITLE }}</title>
+    
+    <meta name="description" content="Simple, free and open source way to host polls for people to vote on. Create your own polls and share them with others!">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ TITLE }}" />
+    <meta property="og:description" content="Simple, free and open source way to host polls for people to vote on. Create your own polls and share them with others!" />
+    <meta property="og:url" content="{{ CANONICAL_HOST }}" />
+    <meta property="og:image" content="{{ HOST }}/static/img/icon.png" />
+    <meta property="og:site_name" content="Poll.Horse" />
+    <meta content="#FFD756" data-react-helmet="true" name="theme-color" />
+    
+    <link rel="canonical" href="{{ CANONICAL_HOST }}" />
+    <meta name=”robots” content=”index,nofollow”>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <script nonce="{{ CORS_SCRIPT_NONCE }}" type="text/javascript">
+        const MAX_POLL_OPTIONS = "{{ MAX_POLL_OPTIONS }}";
+        const MAX_CHARACTER_LENGTH = "{{ MAX_CHARACTER_LENGTH }}";
+    </script>
+    <script nonce="{{ CORS_SCRIPT_NONCE }}" type="text/javascript" src="/static/js/index.js" defer="true" async="true"></script>
+    <!-- FAVICON_MARKER -->
+    
+    <!-- /FAVICON_MARKER -->
+</head>
+<body>
+    <header>
+        <h1>Poll.horse</h1>
+        <h2>Make voting on things simpler</h2>
+    </header>
+    <main>
+        <section class="error {{ FORM_SUBMISSION_ERROR_SHOWN_CLASS }}">
+            {{ FORM_SUBMISSION_ERROR }}
+        </section>
+        <section class="notepad">
+            <div class="notepad-border"></div>
+            <form action="{{ BACKEND_BASE_PATH }}/_backend/poll-form" method="POST">
+                <section class="poll-title">
+                    <input id="poll-title" name="poll-title" type="text" maxlength="{{ MAX_CHARACTER_LENGTH }}" placeholder="Enter your question here" value="{{ FORM_TITLE }}">
+                </section>
+                <section id="poll-options" class="poll-options">
+                    {{ FORM_OPTION_DIVS }}
+                </section>
+                <section class="poll-footer">
+                    <div id="extend-message">Used <span id="options-counter">0</span>/{{ MAX_POLL_OPTIONS }} options.<br>New boxes appear automatically.</div>
+                    <select id="dupe-check" name="dupe-check">
+                        <option value="ip" {{ FORM_DUPECHECK_IP }}>IP-based duplication checking</option>
+                        <option value="cookie" {{ FORM_DUPECHECK_COOKIE }}>Cookie-based duplication checking</option>
+                        <option value="none" {{ FORM_DUPECHECK_NONE }}>No duplication checking</option>
+                    </select>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="multi-select" {{ FORM_MULTI_SELECT }} id="multiple">
+                        <span>Multiple Choice</span>
+                    </label>
+                    <br>
+                    <input type="submit" name="submit" value="Create poll" id="submit-button">
+                    <input type="submit" name="submit" value="Add options" formaction="#" formmethod="get" id="add-options-button">
+                </section>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <ul>
+            {{ FOOTER_LINKS }}
+        </ul>
+        <div class="copyright">{{ GIT_URL }} {{ FOOTER_COPYRIGHT }}</div>
+    </footer>
+</body>
+</html>
